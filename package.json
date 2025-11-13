@@ -1,0 +1,39 @@
+{
+  "name": "grupotp2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "license": "AGPL-version-3.0",
+  "private": false,
+  "engines": {
+    "node": ">= 14.0.0",
+    "npm": ">= 6.0.0"
+  },
+  "homepage": "",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "bugs": "",
+  "keywords": [],
+  "author": {
+    "name": "Shelo_Aixa_Julian_Belu"
+  },
+  "contributors": [],
+  "scripts": {
+    "dev": "node --watch index.js",
+    "format": "npx @biomejs/biome format --write /src index.js"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "morgan": "^1.10.1",
+    "mysql2": "^3.15.3",
+    "sequelize": "^6.37.7",
+    "sqlite3": "^5.1.7"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.3.4"
+  }
+}
