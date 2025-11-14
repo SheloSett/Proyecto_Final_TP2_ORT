@@ -1,5 +1,7 @@
-import express from 'express'
-import { ProductRepositorySequelize } from '../repository/Product.Sequelize.Repository.js' 
+import express from 'express';
+
+import ProductRepositorySequelize from '../repository/Product.Sequelize.Repository.js';
+
 const ProductRouter = express.Router()
 
 ProductRouter.get("/all", ProductRepositorySequelize)

@@ -10,8 +10,9 @@ const {
     MYSQL_PORT,
     SERVER_PORT,
     SERVER_HOST,
-    DIALECT
-
+    DIALECT,
+    SUPABASE_URL,
+    SUPABASE_API_KEY
 } = process.env
 
 const config = {
@@ -23,7 +24,9 @@ const config = {
     MYSQL_PORT,
     SERVER_PORT,
     SERVER_HOST,
-    DIALECT
+    DIALECT,
+    SUPABASE_URL,
+    SUPABASE_API_KEY
 }
 
 export default config;
