@@ -1,0 +1,26 @@
+@host= http://localhost:3001
+@contentType= application/json
+
+@userEmail = "user@testing.com"
+@userPassword = "usertesting"
+
+@userRegister = "register@testing.com"
+@registerPassword = "registertesting"
+
+### User Login
+POST {{host}}/api/auth/login
+Content-Type: {{contentType}}
+
+{
+    "email": {{userEmail}},
+    "password": {{userPassword}}
+}
+
+### User Registration
+POST {{host}}/api/auth/register
+Content-Type: {{contentType}}
+
+{
+    "email": {{userRegister}},
+    "password": {{registerPassword}}
+}
