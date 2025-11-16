@@ -1,11 +1,11 @@
 import express from 'express'
-import { ProductRepositorySequelize } from '../repository/Product.Sequelize.Repository.js' 
+import { ProductController } from "../controller/product.controller.js"
 const ProductRouter = express.Router()
 
-ProductRouter.get("/all", ProductRepositorySequelize)
-ProductRouter.get("/:id", ProductRepositorySequelize)
-ProductRouter.post("/createProduct", ProductRepositorySequelize)
-ProductRouter.patch("/updateProduct/:id", ProductRepositorySequelize)
-ProductRouter.delete("/deleteProduct/:id", ProductRepositorySequelize)
+ProductRouter.get("/all", ProductController.getAllProducts)
+ProductRouter.get("/:id", ProductController.getProductById)
+ProductRouter.post("/createProduct", ProductController.createProduct)
+ProductRouter.patch("/updateProduct/:id", ProductController.updateProduct)
+ProductRouter.delete("/deleteProduct/:id", ProductController.deleteProduct)
 
 export default ProductRouter;

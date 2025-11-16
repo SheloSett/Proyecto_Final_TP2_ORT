@@ -45,10 +45,10 @@ export const ProductController = {
 
     createProduct: async (req, resp) => {
         try {
-            const {name, price, description, created_date, category, color} = req.body;
-            console.log(name, price, description, created_date, category, color);
+            const {name, price, description, category, color, stock, RGB } = req.body;
+            console.log(name, price, description, category, color);
 
-            const product = await ProductRepository.createOneProduct(name, price, description, created_date, category, color);
+            const product = await ProductRepository.createOneProduct( { name, price, description, category, color, stock, RGB } );
             resp.json({
                 code:200,
                 ok: true,
@@ -66,9 +66,9 @@ export const ProductController = {
 
     updateProduct: async (req, resp) => {
         try {
-            const {name, price, description, color} = req.body;
+            const {name, price, description, created_date, color, stock, RGB} = req.body;
             const {id} = req.params;
-            const product = await ProductRepository.updateOneProduct(id, name, price, description, color)
+            const product = await ProductRepository.updateOneProduct( { id, name, price, description, created_date, color, stock, RGB } )
             resp.json(
                 {
                     code:200,

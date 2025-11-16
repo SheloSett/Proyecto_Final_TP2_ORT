@@ -1,5 +1,5 @@
 import { DataTypes } from "sequelize"
-import { sequelize } from "../databases/mysql.cnx.js"
+import { sequelize } from "../database/mysql.cnx.js"
 
 export const ProductModel = sequelize.define(
     'product',{
@@ -34,6 +34,15 @@ export const ProductModel = sequelize.define(
                 color: {
                     type: DataTypes.STRING(200),
                     allowNull: true 
+                },
+                stock: {
+                    type: DataTypes.INTEGER,
+                    allowNull: true,
+                    defaultValue: 0
+                },
+                RGB: {
+                    type: DataTypes.BOOLEAN,
+                    allowNull: false
                 }
         }, {
             tableName: 'product',
