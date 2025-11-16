@@ -83,5 +83,22 @@ export const ProductController = {
                 {error: "no se pudo actualizar el producto"}
             )
         }
+    },
+
+    deleteProduct: async (req, resp) => {
+        try{
+            const {id} = req.params;
+            await ProductRepository.deleteOneProduct(id);
+            resp.json({
+                    code:200,
+                    ok:true,
+                    payload: "Producto eliminado con el id: " + id
+                }
+            )
+        } catch (error) {
+            resp.status(500).json(
+                {error: "no se pudo Eliminiar el producto" + error.message}
+            ) 
+        }
     }
 }
