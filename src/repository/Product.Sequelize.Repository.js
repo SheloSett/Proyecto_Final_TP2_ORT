@@ -1,5 +1,5 @@
 
 
-export default class ProductRepositorySequelize {
+export default class ProductRepository {
 
 } 
