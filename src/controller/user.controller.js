@@ -10,7 +10,7 @@ export const apiUserController = {
                 const userRegistered = await authService.userSignUp(email, password) 
 
                 return res.status(201).json({
-                    message: `El usuario  ${email} se ha dado de alta correctamente.`,
+                    message: `El usuario ${email} se ha dado de alta correctamente.`,
                     userRegistered
                 })
 

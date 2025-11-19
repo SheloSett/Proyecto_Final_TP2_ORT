@@ -7,7 +7,8 @@
 @userRegister = "register@testing.com"
 @registerPassword = "registertesting"
 
-### User Login
+### User Login y captura del token
+# @name loginUser
 POST {{host}}/api/auth/login
 Content-Type: {{contentType}}
 
