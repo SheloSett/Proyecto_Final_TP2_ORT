@@ -1,24 +1,57 @@
-@host=http://127.0.0.1
+@host=http://localhost
 
 @port=3001
 
-@idProducto=3
+@idProducto=4
 
 @EndpointTemplate = api/products
 
-### Peticion del tipo GET para obtener todos los productos
-GET {{host}}:{{port}}/{{EndpointTemplate}}/all
+@contentType= application/json
 
+@userEmail = "user@testing.com"
+@userPassword = "usertesting"
+
+@userEmailAdmin = "admin@testing.com"
+@userPasswordAdmin = "admintesting"
+
+@userRegister = "admin@testing.com"
+@registerPassword = "admintesting"
+
+### User Login y captura del token
+# @name loginUser
+POST {{host}}:{{port}}/api/auth/login
+Content-Type: {{contentType}}
+
+{
+    "email": {{userEmail}},
+    "password": {{userPassword}}
+}
+
+### User Registration
+POST {{host}}:{{port}}/api/auth/register
+Content-Type: {{contentType}}
+
+{
+    "email": {{userRegister}},
+    "password": {{registerPassword}}
+}
+
+### Peticion del tipo GET para obtener todos los productos
+@token = {{loginUser.response.body.userLogged.token}}
+GET {{host}}:{{port}}/{{EndpointTemplate}}/all
+Authorization: Bearer {{token}}
 
 
 ### Peticion del tipo GET con el id del producto
+@token = {{loginUser.response.body.userLogged.token}}
 GET {{host}}:{{port}}/{{EndpointTemplate}}/{{idProducto}}
+Authorization: Bearer {{token}}
 
-
-
-### Peticion del tipo GET para crear un producto
+### Peticion del tipo POST para crear un producto
+@token = {{loginUser.response.body.userLogged.token}}
 POST {{host}}:{{port}}/{{EndpointTemplate}}/createProduct
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
     "name": "Producto Para borra",
@@ -32,12 +65,16 @@ Content-Type: application/json
 
 
 ### Peticion para actualizar un producto
+@token = {{loginUser.response.body.userLogged.token}}
 PATCH {{host}}:{{port}}/{{EndpointTemplate}}/updateProduct/{{idProducto}}
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
-    "RGB": true
+    "RGB": false
 }
 
 ### Peticion para eliminar un producto
+@token = {{loginUser.response.body.userLogged.token}}
 DELETE {{host}}:{{port}}/{{EndpointTemplate}}/deleteProduct/{{idProducto}}
+Authorization: Bearer {{token}}

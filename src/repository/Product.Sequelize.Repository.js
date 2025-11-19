@@ -1,6 +1,6 @@
 import { ProductModel } from "../model/product.model.js";
-import { Op, Sequelize } from "sequelize";
 import { sequelize } from "../database/mysql.cnx.js";
+import { Op } from "sequelize";
 
 export const ProductRepository = {
     

@@ -11,6 +11,7 @@ export const ProductController = {
                 payload: products
             });
         } catch (error) {
+            console.log(error)
             resp.status(500).json({ error: "error interno del server" });
         }
     },
