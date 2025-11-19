@@ -1,0 +1,43 @@
+@host=http://127.0.0.1
+
+@port=3001
+
+@idProducto=3
+
+@EndpointTemplate = api/products
+
+### Peticion del tipo GET para obtener todos los productos
+GET {{host}}:{{port}}/{{EndpointTemplate}}/all
+
+
+
+### Peticion del tipo GET con el id del producto
+GET {{host}}:{{port}}/{{EndpointTemplate}}/{{idProducto}}
+
+
+
+### Peticion del tipo GET para crear un producto
+POST {{host}}:{{port}}/{{EndpointTemplate}}/createProduct
+Content-Type: application/json
+
+{
+    "name": "Producto Para borra",
+    "price": 100,
+    "description":"Producto de prueba para borrar",
+    "category":"Componentes-PC",
+    "color":"Negro",
+    "stock": 660,
+    "RGB": false
+}
+
+
+### Peticion para actualizar un producto
+PATCH {{host}}:{{port}}/{{EndpointTemplate}}/updateProduct/{{idProducto}}
+Content-Type: application/json
+
+{
+    "RGB": true
+}
+
+### Peticion para eliminar un producto
+DELETE {{host}}:{{port}}/{{EndpointTemplate}}/deleteProduct/{{idProducto}}

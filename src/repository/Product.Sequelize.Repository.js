@@ -1,5 +1,58 @@
+import { ProductModel } from "../model/product.model.js";
+import { Op, Sequelize } from "sequelize";
+import { sequelize } from "../database/mysql.cnx.js";
 
+export const ProductRepository = {
+    
+    getAll: async () => {
+        return await ProductModel.findAll();
+    },
 
-export default class ProductRepositorySequelize {
+    getById: async (id) => {
+        return await ProductModel.findOne({ where: { id } });
+    },
 
-} 
+    createOneProduct: async ({ name, price, description, category, color, stock, RGB }) => {
+        return await ProductModel.create({ name, price, description, category, color, stock, RGB });
+    },
+    
+    updateOneProduct: async ({ id, name, price, description, created_date, color, stock, RGB }) => {
+        return await ProductModel.update(
+            { name, price, description, created_date, color, stock, RGB },
+            { where: { id } }
+        );
+    },
+
+    deleteOneProduct: async (id) => {
+        return await ProductModel.destroy({ where: { id } });
+    },
+
+    lowStock: async () => {
+        return await ProductModel.findAll({
+            where: { stock: { [Op.lt]: 10 } }
+        });
+    },
+
+    reportStock: async () => {
+        const result = await ProductModel.findAll({
+            attributes: [
+                [sequelize.fn("COUNT", sequelize.col("id")), "totalProducts"],
+                [sequelize.fn("SUM", sequelize.col("stock")), "totalStock"],
+                [sequelize.fn("AVG", sequelize.col("price")), "avgPrice"]
+            ],
+            raw: true
+        });
+
+        return result[0];
+    },
+
+    stats: async () => {
+        return await ProductModel.findAll({
+            attributes: [
+                "category",
+                [sequelize.fn("COUNT", sequelize.col("id")), "count"]
+            ],
+            group: ["category"]
+        });
+    }
+};
