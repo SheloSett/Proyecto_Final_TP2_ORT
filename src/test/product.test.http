@@ -23,8 +23,8 @@ POST {{host}}:{{port}}/api/auth/login
 Content-Type: {{contentType}}
 
 {
-    "email": {{userEmailAdmin}},
-    "password": {{userPasswordAdmin}}
+    "email": {{userEmail}},
+    "password": {{userPassword}}
 }
 
 ### User Registration
@@ -77,4 +77,19 @@ Authorization: Bearer {{token}}
 ### Peticion para eliminar un producto
 @token = {{loginUser.response.body.userLogged.token}}
 DELETE {{host}}:{{port}}/{{EndpointTemplate}}/deleteProduct/{{idProducto}}
+Authorization: Bearer {{token}}
+
+### Peticion del tipo GET para low stocks products
+@token = {{loginUser.response.body.userLogged.token}}
+GET {{host}}:{{port}}/{{EndpointTemplate}}/lowStock
+Authorization: Bearer {{token}}
+
+### Peticion del tipo GET para stats products
+@token = {{loginUser.response.body.userLogged.token}}
+GET {{host}}:{{port}}/{{EndpointTemplate}}/admin/stats
+Authorization: Bearer {{token}}
+
+### Peticion del tipo GET para report stock products
+@token = {{loginUser.response.body.userLogged.token}}
+GET {{host}}:{{port}}/{{EndpointTemplate}}/report/stock
 Authorization: Bearer {{token}}
