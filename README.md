@@ -19,39 +19,39 @@ API REST desarrollada con **Node.js**, **Express**, **MySQL** y **Supabase Auth*
 ├── node_modules/
 ├── src/
 │   ├── config/
-│   │   └── config.js                
+│   │   └── config.js
 │   │
 │   ├── controller/
-│   │   └── product.controller.js    
+│   │   └── product.controller.js
 │   │
 │   ├── database/
-│   │   └── mysql.cnx.js             
+│   │   └── mysql.cnx.js
 │   │
 │   ├── model/
-│   │   └── product.model.js     
+│   │   └── product.model.js
 │   │
 │   ├── repository/
-│   │   └── Product.SequelizeRepository.js  
+│   │   └── Product.SequelizeRepository.js
 │   │
 │   ├── router/
-│   │   └── product.router.js        
+│   │   └── product.router.js
 │   │
 │   ├── test/
-│   │   └── product.test.http        
+│   │   └── product.test.http
 │   │
 │   ├── validators/
-│   │   ├── handleValidation.js      
-│   │   └── productValidator.js      
+│   │   ├── handleValidation.js
+│   │   └── productValidator.js
 │
-├── server.js                        
-│
-├── .env                             
-├── .env.dev                         
-├── .gitignore                       
-├── biome.json                       
-├── index.js                         
+├── server.js
+├── .env
+├── .env.dev
+├── .gitignore
+├── biome.json
+├── index.js
 ├── package.json
-├── package-lock.json
+└── package-lock.json
+
 
 
 ---
