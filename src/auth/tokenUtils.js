@@ -5,12 +5,18 @@ const supabase = new userRepository();
   export const getUserToken = (req) => {
     const authHeader = req.headers.authorization;
 
-    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+    if (!authHeader || !authHeader.startsWith("Bearer ")){      
       return null;
     }
 
-    return authHeader.split(" ")[1];
-  };
+    const userToken = authHeader.split(" ")[1];
+
+    if(!userToken || userToken.startsWith("{{")) {
+      return null;
+    }
+
+    return userToken;
+   };
 
   export const validateToken = async (token) => {
       try {
