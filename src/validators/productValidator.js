@@ -52,3 +52,6 @@ export const validatePartialProduct = [
         .optional()
         .isBoolean().withMessage("RGB debe ser true o false")
 ];
+
+export const createProductValidator = validateProduct;
+export const updateProductValidator = validatePartialProduct;
