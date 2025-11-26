@@ -1,4 +1,5 @@
 import supabaseCnx from "../database/supabase.cnx.js";
+import { USER_ROLES } from "../utils/userRoles.js";
 
 export class userRepository {
     constructor () {
@@ -24,7 +25,7 @@ export class userRepository {
         const { data , error } = await this.supabase.from('profiles').insert({
             id: userId,
             nombre: email,
-            rol: "Cliente"
+            rol: USER_ROLES.CLIENTE
         }).select().single();
 
         if(error) throw new Error(error.message);

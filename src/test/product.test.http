@@ -23,8 +23,8 @@ POST {{host}}:{{port}}/api/auth/login
 Content-Type: {{contentType}}
 
 {
-    "email": {{userEmail}},
-    "password": {{userPassword}}
+    "email": {{userEmailAdmin}},
+    "password": {{userPasswordAdmin}}
 }
 
 ### User Registration
