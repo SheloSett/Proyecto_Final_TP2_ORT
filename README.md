@@ -16,6 +16,7 @@ API REST desarrollada con **Node.js**, **Express**, **MySQL** y **Supabase Auth*
 
 ## 📁 Estructura del Proyecto
 
+
 ├── node_modules/
 ├── src/
 │   ├── config/
@@ -51,7 +52,6 @@ API REST desarrollada con **Node.js**, **Express**, **MySQL** y **Supabase Auth*
 ├── index.js
 ├── package.json
 └── package-lock.json
-
 
 
 ---
