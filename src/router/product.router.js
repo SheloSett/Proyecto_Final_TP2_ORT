@@ -1,11 +1,10 @@
 import { Router } from "express";
 import { ProductController } from "../controller/product.controller.js";
-import { validateProduct, validatePartialProduct } from "../validators/productValidator.js";
+import { createProductValidator, updateProductValidator } from "../validators/productValidator.js";
 import { handleValidationErrors } from "../validators/handleValidation.js";
 
 import { isAdmin, authenticateToken } from '../middleware/authMiddleware.js';
 
-//const ProductRouter = express.Router();
 const ProductRouter = Router();
 
 /**
@@ -103,7 +102,7 @@ ProductRouter.post(
   "/createProduct",
   authenticateToken,
   isAdmin,
-  validateProduct,            
+  createProductValidator,            
   handleValidationErrors,
   ProductController.createProduct
 );
@@ -160,7 +159,7 @@ ProductRouter.patch(
   "/updateProduct/:id",
   authenticateToken,
   isAdmin,
-  validatePartialProduct,       
+  updateProductValidator,       
   handleValidationErrors,
   ProductController.updateProduct
 );
