@@ -20,7 +20,11 @@ const options = {
     servers: [
       {
         url: `http://${config.SERVER_HOST}:${config.SERVER_PORT}`,
-        description: 'Servidor de desarrollo'
+        description: 'Servidor de desarrollo (127.0.0.1)'
+      },
+      {
+        url: `http://localhost:${config.SERVER_PORT}`,
+        description: 'Servidor de desarrollo (localhost)'
       }
     ],
     components: {

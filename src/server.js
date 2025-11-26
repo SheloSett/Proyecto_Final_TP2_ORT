@@ -8,10 +8,40 @@ import apiUserRouter from "./router/user.router.js"
 
 const server = express()
 
-// Configuración de seguridad con Helmet
-server.use(helmet())
+// Configuración de seguridad con Helmet (ajustada para Swagger UI)
+server.use(helmet({
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc: ["'self'"],
+      styleSrc: ["'self'", "'unsafe-inline'"], // Necesario para Swagger UI
+      scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'"], // Necesario para Swagger UI
+      imgSrc: ["'self'", "data:", "https:"]
+    }
+  },
+  crossOriginEmbedderPolicy: false // Permite que Swagger UI funcione correctamente
+}))
 
 server.use(express.json())
+
+// Middleware para headers CORS mínimos (solo para Swagger UI, sin paquete externo)
+server.use((req, res, next) => {
+    // Headers básicos para permitir que Swagger UI funcione
+    res.setHeader('Access-Control-Allow-Origin', '*')
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS')
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization')
+    
+    // Si es una petición OPTIONS (preflight), responder inmediatamente
+    if (req.method === 'OPTIONS') {
+        return res.sendStatus(200)
+    }
+    
+    // Asegura que las respuestas JSON tengan el Content-Type correcto
+    if (req.path.startsWith('/api/')) {
+        res.setHeader('Content-Type', 'application/json; charset=utf-8')
+    }
+    
+    next()
+})
 
 /**
  * @swagger
@@ -45,7 +75,20 @@ server.get("/", (req, res) => {
 // Configuración de Swagger UI
 server.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec, {
     customCss: '.swagger-ui .topbar { display: none }',
-    customSiteTitle: "API Productos Gamer - Documentación"
+    customSiteTitle: "API Productos Gamer - Documentación",
+    swaggerOptions: {
+        persistAuthorization: true, // Mantiene el token autorizado
+        displayRequestDuration: true, // Muestra el tiempo de respuesta
+        filter: true, // Habilita el filtro de búsqueda
+        tryItOutEnabled: true, // Habilita el botón "Try it out"
+        docExpansion: 'list', // Expande solo los tags, no todos los endpoints
+        defaultModelsExpandDepth: 2, // Profundidad de expansión de modelos
+        defaultModelExpandDepth: 2,
+        displayOperationId: false,
+        showExtensions: true,
+        showCommonExtensions: true,
+        supportedSubmitMethods: ['get', 'post', 'put', 'delete', 'patch'] // Asegura que todos los métodos funcionen
+    }
 }))
 
 // Rutas de la API
