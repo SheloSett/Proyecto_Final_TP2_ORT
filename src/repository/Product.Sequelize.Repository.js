@@ -29,7 +29,8 @@ export const ProductRepository = {
 
     lowStock: async () => {
         return await ProductModel.findAll({
-            where: { stock: { [Op.lt]: 10 } }
+            where: { stock: { [Op.lte]: 10 } }, 
+            raw: true
         });
     },
 
@@ -38,7 +39,7 @@ export const ProductRepository = {
             attributes: [
                 [sequelize.fn("COUNT", sequelize.col("id")), "totalProducts"],
                 [sequelize.fn("SUM", sequelize.col("stock")), "totalStock"],
-                [sequelize.fn("AVG", sequelize.col("price")), "avgPrice"]
+                [sequelize.fn("AVG", sequelize.col("stock")), "avgStock"]
             ],
             raw: true
         });
@@ -52,7 +53,8 @@ export const ProductRepository = {
                 "category",
                 [sequelize.fn("COUNT", sequelize.col("id")), "count"]
             ],
-            group: ["category"]
+            group: ["category"],
+            raw: true
         });
     }
 };

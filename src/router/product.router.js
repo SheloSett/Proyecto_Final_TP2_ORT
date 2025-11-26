@@ -1,11 +1,6 @@
-import express from 'express';
+import { Router } from "express";
 import { ProductController } from "../controller/product.controller.js";
-
-import { 
-  createProductValidator, 
-  updateProductValidator 
-} from "../validators/productValidator.js";
-
+import { validateProduct, validatePartialProduct } from "../validators/productValidator.js";
 import { handleValidationErrors } from "../validators/handleValidation.js";
 
 import { isAdmin, authenticateToken } from '../middleware/authMiddleware.js';
