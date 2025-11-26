@@ -1,9 +1,13 @@
 import express from "express"
+import helmet from "helmet"
 
 import ProductRouter from "./router/product.router.js"
 import apiUserRouter from "./router/user.router.js"
 
 const server = express()
+
+// Configuración de seguridad con Helmet
+server.use(helmet())
 
 server.use(express.json())
 
