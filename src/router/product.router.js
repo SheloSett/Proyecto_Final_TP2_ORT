@@ -5,7 +5,8 @@ import { handleValidationErrors } from "../validators/handleValidation.js";
 
 import { isAdmin, authenticateToken } from '../middleware/authMiddleware.js';
 
-const ProductRouter = express.Router();
+//const ProductRouter = express.Router();
+const ProductRouter = Router();
 
 /**
  * @swagger
@@ -97,7 +98,15 @@ ProductRouter.get("/:id", authenticateToken, ProductController.getProductById);
  *       500:
  *         description: Error interno del servidor
  */
-ProductRouter.post("/createProduct", authenticateToken, isAdmin, createProductValidator, handleValidationErrors, ProductController.createProduct);
+// ProductRouter.post("/createProduct", authenticateToken, isAdmin, createProductValidator, handleValidationErrors, ProductController.createProduct);
+ProductRouter.post(
+  "/createProduct",
+  authenticateToken,
+  isAdmin,
+  validateProduct,            
+  handleValidationErrors,
+  ProductController.createProduct
+);
 
 /**
  * @swagger
@@ -146,7 +155,15 @@ ProductRouter.post("/createProduct", authenticateToken, isAdmin, createProductVa
  *       500:
  *         description: Error interno del servidor
  */
-ProductRouter.patch("/updateProduct/:id",authenticateToken ,isAdmin, updateProductValidator,handleValidationErrors,ProductController.updateProduct);
+// ProductRouter.patch("/updateProduct/:id",authenticateToken ,isAdmin, updateProductValidator,handleValidationErrors,ProductController.updateProduct);
+ProductRouter.patch(
+  "/updateProduct/:id",
+  authenticateToken,
+  isAdmin,
+  validatePartialProduct,       
+  handleValidationErrors,
+  ProductController.updateProduct
+);
 
 /**
  * @swagger
