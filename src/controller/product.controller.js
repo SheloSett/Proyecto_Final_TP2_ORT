@@ -7,6 +7,7 @@ export const ProductController = {
             const products = await ProductRepository.getAll();
             resp.json({ code: 200, ok: true, payload: products });
         } catch (error) {
+            console.log(error)
             resp.status(500).json({ error: "error interno del server" });
         }
     },

@@ -3,32 +3,21 @@ import { ProductController } from "../controller/product.controller.js";
 import { validateProduct, validatePartialProduct } from "../validators/productValidator.js";
 import { handleValidationErrors } from "../validators/handleValidation.js";
 
-const router = Router();
+import { isAdmin, authenticateToken } from '../middleware/authMiddleware.js';
 
-router.get("/lowStock", ProductController.lowStock);
-router.get("/reportStock", ProductController.reportStock);
-router.get("/stats", ProductController.stats);
+const ProductRouter = express.Router();
 
-router.get("/all", ProductController.getAllProducts);
-router.get("/:id", ProductController.getProductById);
+ProductRouter.get("/all", authenticateToken, ProductController.getAllProducts);
+ProductRouter.get("/lowStock", authenticateToken, isAdmin, ProductController.lowStock);
+ProductRouter.get("/report/stock", authenticateToken, isAdmin, ProductController.reportStock);
+ProductRouter.get("/admin/stats", authenticateToken, isAdmin, ProductController.stats);
+ProductRouter.get("/:id", authenticateToken, ProductController.getProductById);
 
-router.post(
-    "/createProduct",
-    validateProduct,
-    handleValidationErrors,
-    ProductController.createProduct
-);
+ProductRouter.post("/createProduct", authenticateToken, isAdmin, createProductValidator, handleValidationErrors, ProductController.createProduct);
 
-router.patch(
-    "/updateProduct/:id",
-    validatePartialProduct,
-    handleValidationErrors,
-    ProductController.updateProduct
-);
+ProductRouter.patch("/updateProduct/:id",authenticateToken ,isAdmin, updateProductValidator,handleValidationErrors,ProductController.updateProduct);
+  
+ProductRouter.delete("/deleteProduct/:id", authenticateToken, isAdmin, ProductController.deleteProduct);
 
-router.delete(
-    "/deleteProduct/:id",
-    ProductController.deleteProduct
-);
 
-export default router;
+export default ProductRouter;
